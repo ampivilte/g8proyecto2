@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { auth } from "./src/firebase/config";
-import Login from "./src/Screens/Login";
-import Register from "./src/Screens/Register";
+import Login from "./src/screens/Login";
+import Register from "./src/screens/Register";
 
 const Stack = createNativeStackNavigator()
 

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Text, View, Pressable } from "react-native-web";
 import { StyleSheet } from "react-native";
 import { TextInput } from "react-native-web";
-import { auth } from "../firebase/config";
+import { auth, db } from "../firebase/config";
 
 export class Register extends Component {
   constructor(props) {
@@ -13,18 +13,34 @@ export class Register extends Component {
       userName: '',
       registered: false,
       error: '',
+      owner: '',
+      createdAt: '',
     }
   }
 
   register(email, pass) {
-    auth.createUserWithEmailAndPassword(email, pass)
-    .then(response => {
-      this.setState({registered: true});
-      this.props.navigation.navigate('Login');
-    })
-    .catch(error => {
-      this.setState({error: 'Error al registrarte a Petl :('})
-    })
+
+    if(this.state.email === '') {
+      this.setState({ error: "Email obligatorio!"});
+    } else if(this.state.password === '') {
+      this.setState({ error: "Contraseña obligatoria!"})
+    } else if(this.state.userName === '') {
+      this.setState({ error: "Nombre de usuario obligatorio!"})
+    } else {
+      auth.createUserWithEmailAndPassword(email, pass)
+      .then(() => {
+        db.collection('users').add({
+          owner: auth.currentUser.email, 
+          createdAt: Date.now(),
+          email: this.state.email,
+          userName: this.state.userName,
+        });
+        this.props.navigation.navigate('Login')
+      })
+      .catch(error => {
+        this.setState({ error: 'Error al registrarte a Petly :('})
+      })
+    }
   }
 
   render() {
@@ -56,12 +72,14 @@ export class Register extends Component {
             value={this.state.userName}
           />
 
+          <Text>{this.state.error}</Text>
+
           <Pressable onPress={() => this.register(this.state.email, this.state.password)}>
             <Text>Registrarme</Text>
           </Pressable>
 
           <Pressable onPress={() => this.props.navigation.navigate('Login')}>
-            <Text>Ir al login</Text>
+            <Text>¡Ya tengo cuenta en Petly!</Text>
           </Pressable>
         </View>
       </View>
