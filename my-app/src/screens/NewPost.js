@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, Pressable } from "react-native-web";
 import { TextInput } from "react-native-web";
-import { auth, db } from "../firebase/config";
+import { db } from "../firebase/config";
 import { StyleSheet } from "react-native";
 
 export class NewPost extends Component {
@@ -63,7 +63,7 @@ export class NewPost extends Component {
 const styles = StyleSheet.create({
     titulo: {
         fontSize: 30,
-    }
+    } 
 })
 
 export default NewPost
