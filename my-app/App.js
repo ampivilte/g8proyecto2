@@ -7,6 +7,7 @@ import { ActivityIndicator, View } from "react-native";
 import HomeScreen from "./src/screens/HomeScreen";
 import Login from "./src/screens/Login";
 import Register from "./src/screens/Register";
+import HomeMenu from "./src/components/HomeMenu";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -67,6 +68,16 @@ class NavegadorPrincipal extends Component{
 
 export default function App() {
   return (
+<<<<<<< HEAD
    <NavegadorPrincipal/>
+=======
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+        <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
+        <Stack.Screen name="HomeMenu" component={HomeMenu} options={{headerShown: false}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+>>>>>>> refs/remotes/origin/main
   );
 }
