@@ -13,63 +13,71 @@ const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 function TabsDeApp() {
-  return (
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="HomeScreen" component={HomeScreen} />
-      <Tab.Screen name="HomeMenu" component={HomeMenu} />
+  return(
+    <Tab.Navigator screenOptions={{headerShown:false}}>
+        <Tab.Screen name="HomeScreen" component={HomeScreen}/>
+        
     </Tab.Navigator>
   );
 }
 
-
-class NavegadorPrincipal extends Component {
+class NavegadorPrincipal extends Component{
   constructor(props) {
     super(props);
     this.state = {
-      logueado: null, 
-    };
-  }
+      logueado: false,
+    }
+  };
 
-  componentDidMount() {
-    auth.onAuthStateChanged((usuario) => {
+  componentDidMount(){
+    auth.onAuthStateChanged ((usuario)=>{
       if (usuario) {
-        this.setState({ logueado: true });
-      } else {
-        this.setState({ logueado: false });
+        this.setState({logueado: true});
+      } else{
+          this.setState({logueado:false});
       }
     });
   }
 
-  render() {
-    if (this.state.logueado === null) {
-      return (
-        <View
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <ActivityIndicator size="large" />
+  render(){
+    //loader para cuando no se si hay usuario
+    if(this.state.logueado === null){
+      return(
+        <View>
+          <ActivityIndicator size={'large'}/>
         </View>
       );
-    }
+    };
 
-    return (
+    return(
       <NavigationContainer>
         {this.state.logueado ? (
-          <TabsDeApp />
+          <TabsDeApp/>
         ) : (
-          <Stack.Navigator screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
+          <Stack.Navigator screenOptions={{headerShown:false}}>
+            <Stack.Screen name="Login" component={Login}/>
+            <Stack.Screen name="Register" component={Register}/>
           </Stack.Navigator>
         )}
       </NavigationContainer>
     );
-  }
-}
+  };
+} 
+
+
 
 export default function App() {
-  return <NavegadorPrincipal />;
+  return (
+<<<<<<< HEAD
+   <NavegadorPrincipal/>
+=======
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Login" component={Login} options={{headerShown: false}}/>
+        <Stack.Screen name="Register" component={Register} options={{headerShown: false}}/>
+        <Stack.Screen name="HomeMenu" component={HomeMenu} options={{headerShown: false}}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+>>>>>>> refs/remotes/origin/main
+  );
 }
