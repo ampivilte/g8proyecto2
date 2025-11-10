@@ -59,7 +59,7 @@ export class Perfil extends Component {
                     )}
                 />
 
-                <Pressable onPress={() => this.logout}>
+                <Pressable onPress={() => this.logout()}>
                     <Text>Cerrar sesión</Text>
                 </Pressable>
             </View>

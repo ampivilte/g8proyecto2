@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, Pressable } from "react-native-web";
+import { Text, View, Pressable, Image } from "react-native-web";
 import { TextInput } from "react-native-web";
 import { auth } from "../firebase/config";
 import { StyleSheet } from "react-native";
@@ -34,6 +34,7 @@ export class Login extends Component {
     render() {
         return(
             <View>
+                <Image source={require('../../assets/logoPetly.png')} resizeMode="contain" style={styles.logo}/>
                 <Text>Loguearme a Petly!</Text>
                 <Text>Hola! Para ingresar a tu cuenta Petly, completá con tu email y contraseña.</Text>
 
@@ -73,6 +74,13 @@ const styles = StyleSheet.create({
     titulo: {
         fontSize: 30,
     },
+    logo:{
+        width: 150,
+        height: 150,
+        marginBottom: 25,
+        resizeMode: "contain",
+        alignSelf: "center",
+    }
 })
 
 export default Login

@@ -11,26 +11,7 @@ export class Post extends Component {
         }
     }
 
-    componentDidMount() {
-        if(this.props.data.likes.includes(auth.currentUser.email)) {
-            this.setState({ likeado: true })
-        }
-    }
-
-    likePost() {
-        db.collection('posts')
-        .doc(this.props.id)
-        .update({ likes: [this.props.data.likes, auth.currentUser.email]})
-        .then(() => this.setState({ likeado: true}))
-    }
-
-    sacarLikePost() {
-        let likesActualizados = this.props.data.likes.filter((email) => email !== auth.currentUser.email)
-        db.collection('posts')
-        .doc(this.props.id)
-        .update({ likes: likesActualizados })
-        .then(() => this.setState({ likeado: false }))
-    }
+    
 
     render() {
         return(
@@ -53,3 +34,5 @@ export class Post extends Component {
         )
     }
 }
+
+export default Post
