@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native-web";
+import { Text, View, Pressable, StyleSheet } from "react-native";
 import { db, auth } from "../firebase/config";
-import { Pressable, StyleSheet } from "react-native";
 
 export class Post extends Component {
     constructor(props) {
@@ -11,6 +10,26 @@ export class Post extends Component {
         }
     }
 
+    componentDidMount() {
+        if(this.props.data.likes.includes(auth.currentUser.email)) {
+            this.setState({ likeado: true })
+        }
+    }
+
+    likePost() {
+        db.collection('posts')
+        .doc(this.props.id)
+        .update({ likes: [this.props.data.likes, auth.currentUser.email]})
+        .then(() => this.setState({ likeado: true}))
+    }
+
+    sacarLikePost() {
+        let likesActualizados = this.props.data.likes.filter((email) => email !== auth.currentUser.email)
+        db.collection('posts')
+        .doc(this.props.id)
+        .update({ likes: likesActualizados })
+        .then(() => this.setState({ likeado: false }))
+    }
     
 
     render() {

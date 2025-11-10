@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Text, View, Pressable, Image } from "react-native-web";
-import { TextInput } from "react-native-web";
+import { Text, View, Pressable, Image, StyleSheet } from "react-native";
+import { TextInput } from "react-native";
 import { auth } from "../firebase/config";
-import { StyleSheet } from "react-native";
 
 export class Login extends Component {
     constructor(props) {
@@ -13,6 +12,16 @@ export class Login extends Component {
             error: ''
         }
     }
+
+    componentDidMount() {
+        auth.onAuthStateChanged(user => { 
+            if(user) {
+                this.props.navigation.navigate('Home')
+            }
+        })
+    }
+
+
 
     login(email, pass) {
 

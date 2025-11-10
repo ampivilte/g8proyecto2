@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Text, View, Pressable } from "react-native-web";
-import { TextInput } from "react-native-web";
+import { Text, View, Pressable } from "react-native";
+import { TextInput } from "react-native";
 import { db } from "../firebase/config";
 import { StyleSheet } from "react-native";
 

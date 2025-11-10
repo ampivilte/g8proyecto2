@@ -1,8 +1,7 @@
 import React, { Component } from "react";
-import { Text, View, Pressable, FlatList } from "react-native-web";
+import { Text, View, Pressable, FlatList, StyleSheet } from "react-native";
 import { auth, db } from "../firebase/config";
 import { Post } from "../components/Post";
-import { StyleSheet } from "react-native";
 
 export class Perfil extends Component {
     constructor(props) {
