@@ -71,7 +71,6 @@ export class Register extends Component {
           />
 
           <Text>{this.state.error}</Text>
-          
 
           <Pressable onPress={() => this.register(this.state.email, this.state.password)}>
             <Text>Registrarme</Text>

@@ -8,25 +8,20 @@ export class Login extends Component {
         this.state = {
             email: '',
             password: '',
+            logged: false,
             error: ''
         }
     }
 
     login(email, pass) {
-
-        if(this.state.email === '') {
-            this.setState({ error: "Ingrese su email correctamente"});
-        } else if(this.state.password === '') {
-            this.setState({ error: "Ingrese su contraseña correctamente"})
-        } else {
-            auth.signInWithEmailAndPassword(email, pass)
-            .then(response => {
-                this.props.navigation.navigate('HomeMenu');
-            })
-            .catch(error => {
-                this.setState({ error: "Error al hacer el login"})
-            })
-        }
+        auth.signInWithEmailAndPassword(email, pass)
+        .then(response => {
+            this.setState({ logged: true });
+            this.props.navigation.navigate('Home');
+        })
+        .catch(error => {
+            this.setState({ error: 'Credenciales inválidas'})
+        })
     }
 
     render() {
@@ -51,9 +46,7 @@ export class Login extends Component {
                         value={this.state.password}
                     />
 
-                    <Text>{this.state.error}</Text>
-                    
-                    <Pressable onPress={() => this.login(this.state.email, this.state.password)}>
+                    <Pressable>
                         <Text>Login</Text>
                     </Pressable>
 
