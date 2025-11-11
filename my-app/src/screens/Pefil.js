@@ -40,30 +40,77 @@ export class Perfil extends Component {
 
     render() {
         return(
-            <View>
-                <Text>Mi Perfil Petly</Text>
+            <View style={styles.container}>
+            <Text style={styles.header}>Mi Perfil Petly</Text>
 
-                <Text>Usuario: {this.state.user.userName}</Text>
-                <Text>Email: {this.state.user.email}</Text>
-                <Text>Posts:</Text>
-                <FlatList
-                    data={this.state.posts}
-                    keyExtractor={(item) => item.id}
-                    renderItem={({item}) => (
-                        <Post
-                            id={item.id}
-                            data={item.data}
-                            navigation={this.props.navigation}
-                        />
-                    )}
-                />
+            <Text style={styles.infoUsuario}>Usuario: {this.state.user.userName}</Text>
+            <Text style={styles.infoUsuario}>Email: {this.state.user.email}</Text>
+            <Text style={styles.tituloPost}>Posts:</Text>
+            <FlatList
+                data={this.state.posts}
+                keyExtractor={(item) => item.id}
+                renderItem={({item}) => (
+                    <Post
+                        id={item.id}
+                        data={item.data}
+                        navigation={this.props.navigation}
+                        style={styles.posteo}
+                    />
+                )}
+            />
 
-                <Pressable onPress={() => this.logout()}>
-                    <Text>Cerrar sesión</Text>
-                </Pressable>
-            </View>
+            <Pressable onPress={() => this.logout()} style={styles.botonLogout}>
+                <Text style={styles.textoBotonLogout}>Cerrar sesión</Text>
+            </Pressable>
+        </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: "#faf5eb",
+        padding: 20,
+        alignItems: "center",
+    },
+    header: {
+        fontSize: 24,
+        fontWeight: "bold",
+        color: "#6B4EFF",
+        marginBottom: 20,
+    },
+    infoUsuario: {
+        fontSize: 18,
+        color: "#555",
+        marginBottom: 10,
+    },
+    tituloPost: {
+        fontSize: 18,
+        fontWeight: "bold",
+        color: "#6B4EFF",
+        marginTop: 20,
+    },
+    posteo: {
+        width: '100%',
+        padding: 15,
+        backgroundColor: "#fff",
+        borderRadius: 8,
+        marginBottom: 15,
+    },
+    botonLogout: {
+        marginTop: 20,
+        padding: 10,
+        backgroundColor: "#6B4EFF",
+        borderRadius: 5,
+        alignItems: "center",
+        width: "100%",
+    },
+    textoBotonLogout: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "bold",
+    },
+})
 
 export default Perfil
