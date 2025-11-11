@@ -35,30 +35,80 @@ export class Post extends Component {
 
     render() {
         return(
-            <View>
-                <Text>{this.props.data.owner}</Text>
-                <Text>{this.props.data.post}</Text>
+            <View style={styles.contenedorPost}>
+                <Text style={styles.textoPropietario}>{this.props.data.owner}</Text>
+                <Text style={styles.textoPost}>{this.props.data.post}</Text>
 
-                <View>
-                    <Text>{this.props.data.likes.length}</Text>
-                    <Pressable onPress={() => this.state.likeado ? this.sacarLikePost() : this.likePost()}>
-                        <Text>{this.state.likeado ?  "❤️ Quitar like" : "🤍 Like"}</Text>
+                <View style={styles.contenedorAcciones}>
+                    <Text style={styles.cantidadLikes}>{this.props.data.likes.length}</Text>
+                    <Pressable 
+                        onPress={() => this.state.likeado ? this.sacarLikePost() : this.likePost()} 
+                        style={styles.botonLike}
+                    >
+                        <Text style={styles.textoBotonLike}>
+                            {this.state.likeado ? "❤️ Quitar like" : "🤍 Like"}
+                        </Text>
                     </Pressable>
 
-                    <Pressable onPress={() => this.props.navigation.navigate('Comentarios', {id: this.props.id})}>
-                        <Text>💬 Comentar</Text>
+                    <Pressable 
+                        onPress={() => this.props.navigation.navigate('Comentarios', {id: this.props.id})} 
+                        style={styles.botonComentar}
+                    >
+                        <Text style={styles.textoBotonComentar}>💬 Comentar</Text>
                     </Pressable>
                 </View>
             </View>
-
         )
     }
 }
 
 const styles = StyleSheet.create({
-    estilos: {
-        
-    }
-})
+    contenedorPost: {
+        backgroundColor: "#fff",
+        padding: 15,
+        borderRadius: 8,
+        marginBottom: 15,
+    },
+    textoPropietario: {
+        fontSize: 16,
+        fontWeight: "bold",
+        color: "#333",
+        marginBottom: 5,
+    },
+    textoPost: {
+        fontSize: 16,
+        color: "#555",
+        marginBottom: 15,
+    },
+    contenedorAcciones: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    cantidadLikes: {
+        fontSize: 16,
+        color: "#6B4EFF",
+    },
+    botonLike: {
+        padding: 10,
+        backgroundColor: "#faf5eb",
+        borderRadius: 5,
+    },
+    textoBotonLike: {
+        color: "#6B4EFF",
+        fontSize: 16,
+        fontWeight: "bold",
+    },
+    botonComentar: {
+        padding: 10,
+        backgroundColor: "#faf5eb",
+        borderRadius: 5,
+    },
+    textoBotonComentar: {
+        color: "#6B4EFF",
+        fontSize: 16,
+        fontWeight: "bold",
+    },
+});
 
 export default Post
