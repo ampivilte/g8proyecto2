@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, Pressable, StyleSheet } from "react-native";
 import { db, auth } from "../firebase/config";
+import firebase from "firebase";
 
 export class Post extends Component {
     constructor(props) {
@@ -19,7 +20,7 @@ export class Post extends Component {
     likePost() {
         db.collection('posts')
         .doc(this.props.id)
-        .update({ likes: [this.props.data.likes, auth.currentUser.email]})
+        .update({ likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)})
         .then(() => this.setState({ likeado: true}))
     }
 
@@ -39,9 +40,9 @@ export class Post extends Component {
                 <Text>{this.props.data.post}</Text>
 
                 <View>
-                    <Text>{this.props.data.likes.lenght}</Text>
+                    <Text>{this.props.data.likes.length}</Text>
                     <Pressable onPress={() => this.state.likeado ? this.sacarLikePost() : this.likePost()}>
-                        <Text>{this.state.likeado ?  "❤️" : "🤍"}</Text>
+                        <Text>{this.state.likeado ?  "❤️ Quitar like" : "🤍 Like"}</Text>
                     </Pressable>
 
                     <Pressable onPress={() => this.props.navigation.navigate('Comentarios', {id: this.props.id})}>
@@ -53,5 +54,11 @@ export class Post extends Component {
         )
     }
 }
+
+const styles = StyleSheet.create({
+    estilos: {
+        
+    }
+})
 
 export default Post
